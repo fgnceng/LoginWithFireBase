@@ -6,8 +6,48 @@ import {
   TextInput,
   TouchableOpacity
 } from 'react-native';
+import firebase from 'react-native-firebase';
+import Button from 'react-native-button';
 
-export default class Logo extends Component<{}> {
+export default class Form extends Component<{}> {
+  constructor(props) {
+          super(props);
+          this.unsubscriber = null;
+          this.state = {
+              isAuthenticated: false,
+              typedEmail: '',
+              typedPassword: '',
+              user: null,
+          };
+      }
+    //  componentDidMount() {
+    //  this.unsubscriber = firebase.auth().onAuthStateChanged((changedUser) => {
+    //      console.log(`changed User : ${JSON.stringify(changedUser.toJSON())}`);
+    //      this.setState({ user: changedUser });//
+  //    });
+  //}
+  componentWillUnmount() {
+      if (this.unsubscriber) {
+          this.unsubscriber();
+      }
+  }
+  onRegister = () => {
+      firebase.auth().createUserWithEmailAndPassword(this.state.typedEmail, this.state.typedPassword)
+          .then((loggedInUser) => {
+              this.setState({ user: loggedInUser })
+              console.log(`Register with user : ${JSON.stringify(loggedInUser.toJSON())}`);
+          }).catch((error) => {
+              console.log(`Register fail with error: ${error}`);
+          });
+  }
+  onLogin = () => {
+      firebase.auth().signInWithEmailAndPassword(this.state.typedEmail, this.state.typedPassword)
+          .then((loggedInUser) => {
+              console.log(`Login with user : ${JSON.stringify(loggedInUser.toJSON())}`);
+          }).catch((error) => {
+              console.log(`Login fail with error: ${error}`);
+          });
+  }
 
 	render(){
 		return(
@@ -19,6 +59,11 @@ export default class Logo extends Component<{}> {
               selectionColor="#fff"
               keyboardType="email-address"
               onSubmitEditing={()=> this.password.focus()}
+              onChangeText={
+                      (text) => {
+                          this.setState({ typedEmail: text });
+                      }
+                    }
               />
           <TextInput style={styles.inputBox}
               underlineColorAndroid='rgba(0,0,0,0)'
@@ -26,10 +71,35 @@ export default class Logo extends Component<{}> {
               secureTextEntry={true}
               placeholderTextColor = "#ffffff"
               ref={(input) => this.password = input}
+              onChangeText={
+                       (text) => {
+                           this.setState({ typedPassword: text });
+                       }
+                     }
               />
-           <TouchableOpacity style={styles.button}>
-             <Text style={styles.buttonText}>{this.props.type}</Text>
-           </TouchableOpacity>
+              <Button containerStyle={{
+                          padding: 10,
+                          margin: 10,
+                          borderRadius: 4,
+                          backgroundColor: '#841584',
+                          width:300
+                      }}
+                          style={{ fontSize: 17, color: 'white' }}
+                          onPress={this.onRegister}
+                      >Kayıt Ol</Button>
+
+                      <Button containerStyle={{
+                                  padding: 10,
+                                  margin: 10,
+                                  borderRadius: 4,
+                                  backgroundColor: '#841584',
+                                  width:300
+                              }}
+                                  style={{ fontSize: 17, color: 'white' }}
+                                  onPress={this.onLogin}
+                              >Gİriş Yap</Button>
+
+
   		</View>
 			)
 	}
@@ -50,19 +120,7 @@ const styles = StyleSheet.create({
     fontSize:16,
     color:'#ffffff',
     marginVertical: 10
-  },
-  button: {
-    width:300,
-    backgroundColor:'#841584',
-     borderRadius: 25,
-      marginVertical: 10,
-      paddingVertical: 13
-  },
-  buttonText: {
-    fontSize:16,
-    fontWeight:'500',
-    color:'#ffffff',
-    textAlign:'center'
   }
+
 
 });

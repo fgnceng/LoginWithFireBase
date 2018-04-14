@@ -27,14 +27,14 @@ export default class Signup extends Component<{}> {
 					<Text style={styles.signupText}>Already have an account?</Text>
 					<TouchableOpacity onPress={this.goBack}><Text style={styles.signupButton}> Sign in</Text></TouchableOpacity>
 				</View>
-			</View>	
+			</View>
 			)
 	}
 }
 
 const styles = StyleSheet.create({
   container : {
-    backgroundColor:'#455a64',
+    backgroundColor:'#b49e98',
     flex: 1,
     alignItems:'center',
     justifyContent :'center'
@@ -47,12 +47,12 @@ const styles = StyleSheet.create({
     flexDirection:'row'
   },
   signupText: {
-  	color:'rgba(255,255,255,0.6)',
+  	color:'rgba(255,255,255,255)',
   	fontSize:16
   },
   signupButton: {
   	color:'#ffffff',
-  	fontSize:16,
+  	fontSize:19,
   	fontWeight:'500'
   }
 });

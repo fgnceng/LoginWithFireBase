@@ -24,7 +24,7 @@ export default class Login extends Component<{}> {
 				<Logo/>
 				<Form type="Login"/>
 				<View style={styles.signupTextCont}>
-					<Text style={styles.signupText}>Dont have an account yet?</Text>
+					<Text style={styles.signupText}>Already have an account?</Text>
 					<TouchableOpacity onPress={this.signup}><Text style={styles.signupButton}> Signup</Text></TouchableOpacity>
 				</View>
 			</View>
@@ -48,11 +48,11 @@ const styles = StyleSheet.create({
   },
   signupText: {
   	color:'rgba(255,255,255,0.6)',
-  	fontSize:16
+  	fontSize:18
   },
   signupButton: {
   	color:'#ffffff',
-  	fontSize:16,
+  	fontSize:19,
   	fontWeight:'500'
   }
 });
