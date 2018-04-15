@@ -16,6 +16,16 @@ import {Actions} from 'react-native-router-flux';
 
 export default class Login extends Component<{}> {
 
+  constructor(props) {
+      super(props);
+      this.unsubscriber = null;
+      this.state = {
+        isAuthenticated: false,
+        typedEmail: '',
+        typedPassword: '',
+        user: null,
+        };
+      }
 	signup() {
 		Actions.signup()
 	}
@@ -24,47 +34,42 @@ export default class Login extends Component<{}> {
 		return(
 			<View style={styles.container}>
 				<Logo/>
+         <TextInput style={styles.inputBox}
+            underlineColorAndroid='rgba(0,0,0,0)'
+            placeholder="Email"
+            placeholderTextColor = "#ffffff"
+            selectionColor="#fff"
+            keyboardType="email-address"
+            onSubmitEditing={()=> this.password.focus()}
+            onChangeText={
+              (text) => {
+                this.setState({ typedEmail: text });
+                  }}/>
 
             <TextInput style={styles.inputBox}
                 underlineColorAndroid='rgba(0,0,0,0)'
-                placeholder="Email"
-                placeholderTextColor = "#ffffff"
-                selectionColor="#fff"
-                keyboardType="email-address"
-                onSubmitEditing={()=> this.password.focus()}
-                onChangeText={
-                        (text) => {
-                            this.setState({ typedEmail: text });
-                        }
-                      }
-                />
-            <TextInput style={styles.inputBox}
-                underlineColorAndroid='rgba(0,0,0,0)'
-                placeholder="Password"
+                placeholder="Şifre"
                 secureTextEntry={true}
                 placeholderTextColor = "#ffffff"
                 ref={(input) => this.password = input}
                 onChangeText={
                          (text) => {
-                             this.setState({ typedPassword: text });
-                         }
-                       }
-                />
+                          this.setState({ typedPassword: text });
+               }}/>
 
-                        <Button containerStyle={{
-                                    padding: 10,
-                                    margin: 10,
-                                    borderRadius: 25,
-                                    backgroundColor: '#a09ce4',
-                                    width:300
-                                }}
-                                    style={{ fontSize: 17, color: 'white' }}
-                                    onPress={this.onLogin}
-                                >Gİriş Yap</Button>
+              <Button containerStyle={{
+                    padding: 10,
+                    margin: 10,
+                    borderRadius: 25,
+                    backgroundColor: '#a09ce4',
+                    width:300
+                    }}
+                style={{ fontSize: 17, color: 'white' }}
+                onPress={this.onLogin}> Gİriş Yap</Button>
 
 			  	<View style={styles.signupTextCont}>
-					<Text style={styles.signupText}>Already have an account?</Text>
-					<TouchableOpacity onPress={this.signup}><Text style={styles.signupButton}> Signup</Text></TouchableOpacity>
+					<Text style={styles.signupText}>Hesabınız yok mu?</Text>
+					<TouchableOpacity onPress={this.signup}><Text style={styles.signupButton}> Hesap Oluştur</Text></TouchableOpacity>
 				</View>
 			</View>
 			)
