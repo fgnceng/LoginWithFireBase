@@ -99,7 +99,6 @@ export default class Form extends Component<{}> {
                                   onPress={this.onLogin}
                               >Gİriş Yap</Button>
 
-
   		</View>
 			)
 	}
@@ -121,6 +120,4 @@ const styles = StyleSheet.create({
     color:'#ffffff',
     marginVertical: 10
   }
-
-
 });

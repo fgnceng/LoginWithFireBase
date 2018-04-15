@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  StatusBar 
+  StatusBar
 } from 'react-native';
 
 
