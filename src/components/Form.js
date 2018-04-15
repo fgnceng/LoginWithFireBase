@@ -99,7 +99,7 @@ export default class Form extends Component<{}> {
                                   onPress={this.onLogin}
                               >Gİriş Yap</Button>
 
-  		</View>
+  		          </View>
 			)
 	}
 }

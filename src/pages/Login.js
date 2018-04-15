@@ -29,6 +29,33 @@ export default class Login extends Component<{}> {
 	signup() {
 		Actions.signup()
 	}
+  goMain() {
+    Actions.goMain()
+  }
+
+
+  componentWillUnmount() {
+      if (this.unsubscriber) {
+          this.unsubscriber();
+      }
+  }
+  onRegister = () => {
+      firebase.auth().createUserWithEmailAndPassword(this.state.typedEmail, this.state.typedPassword)
+          .then((loggedInUser) => {
+              this.setState({ user: loggedInUser })
+              console.log(`Register with user : ${JSON.stringify(loggedInUser.toJSON())}`);
+          }).catch((error) => {
+              console.log(`Register fail with error: ${error}`);
+          });
+  }
+  onLogin = () => {
+      firebase.auth().signInWithEmailAndPassword(this.state.typedEmail, this.state.typedPassword)
+          .then((loggedInUser) => {
+              console.log(`Login with user : ${JSON.stringify(loggedInUser.toJSON())}`);
+          }).catch((error) => {
+              console.log(`Login fail with error: ${error}`);
+          });
+  }
 
 	render() {
 		return(
@@ -65,7 +92,7 @@ export default class Login extends Component<{}> {
                     width:300
                     }}
                 style={{ fontSize: 17, color: 'white' }}
-                onPress={this.onLogin}> Gİriş Yap</Button>
+                onPress={this.onLogin && this.goMain}> Giriş Yap</Button>
 
 			  	<View style={styles.signupTextCont}>
 					<Text style={styles.signupText}>Hesabınız yok mu?</Text>

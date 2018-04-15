@@ -50,6 +50,8 @@ export default class Signup extends Component<{}> {
           });
   }
 
+
+
 	render() {
 		return(
 			<View style={styles.container}>
@@ -84,7 +86,7 @@ export default class Signup extends Component<{}> {
                 backgroundColor: '#841584',
                 width:300 }}
                style={{ fontSize: 17, color: 'white' }}
-               onPress={this.onRegister}>Kayıt Ol
+               onPress={this.onRegister && this.goBack}>Kayıt Ol
           </Button>
 
 				<View style={styles.signupTextCont}>
@@ -98,7 +100,7 @@ export default class Signup extends Component<{}> {
 
         const styles = StyleSheet.create({
         container : {
-            backgroundColor:'#ec4101',
+            backgroundColor:'#a88172',
             flexGrow: 1,
             justifyContent:'center',
             alignItems: 'center'
